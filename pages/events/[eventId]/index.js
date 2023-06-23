@@ -37,6 +37,15 @@ export async function getStaticProps(ctx) {
   const eventId = ctx.params.eventId;
   const event = await getEventById(eventId);
 
+  if (!event) {
+    return {
+      notFound: true,
+      // redirect: {
+      //   destination: "/events",
+      // },
+    };
+  }
+
   return {
     props: {
       selectedEvent: event,
