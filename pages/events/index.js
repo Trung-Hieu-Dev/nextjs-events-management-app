@@ -1,6 +1,4 @@
-import { useState } from "react";
-
-import { getAllEvents, getFilteredEvents } from "../../dummy-data";
+import { getAllEvents } from "../../dummy-data";
 
 import { useRouter } from "next/router";
 
