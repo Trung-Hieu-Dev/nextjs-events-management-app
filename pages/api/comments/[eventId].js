@@ -44,12 +44,14 @@ async function handler(req, res) {
 
   // get comments by id
   if (req.method === "GET") {
-    const DUMMY_COMMENTS = [
-      { id: "c1", name: "Max", text: "First comment" },
-      { id: "c2", name: "Manuel", text: "Second comment" },
-    ];
+    const db = client.db();
+    const documents = await db
+      .collection("comments")
+      .find()
+      .sort({ _id: -1 })
+      .toArray();
 
-    res.status(200).json({ comments: DUMMY_COMMENTS });
+    res.status(200).json({ comments: documents });
   }
 
   client.close();
