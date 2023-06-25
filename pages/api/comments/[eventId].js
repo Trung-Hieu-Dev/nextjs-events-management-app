@@ -19,23 +19,23 @@ function handler(req, res) {
     }
 
     const newComment = {
-        id: new Date().toISOString();
-        ...req.body
-    }
+      id: new Date().toISOString(),
+      ...req.body,
+    };
 
     console.log(newComment);
 
-    res.status(201).json({message: 'Added comment.', comment: newComment})
+    res.status(201).json({ message: "Added comment.", comment: newComment });
   }
 
   // get comments by id
   if (req.method === "GET") {
     const DUMMY_COMMENTS = [
-        {id: 'c1', name: 'Max', text: 'First comment'},
-        {id: 'c2', name: 'Manuel', text: 'Second comment'},
-    ]
+      { id: "c1", name: "Max", text: "First comment" },
+      { id: "c2", name: "Manuel", text: "Second comment" },
+    ];
 
-    res.status(200).json({comments: DUMMY_COMMENTS})
+    res.status(200).json({ comments: DUMMY_COMMENTS });
   }
 }
 
