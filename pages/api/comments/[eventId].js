@@ -1,7 +1,14 @@
 // /comments/some-event-id
 
-function handler(req, res) {
+import { MongoClient } from "mongodb";
+
+async function handler(req, res) {
   const eventId = req.query.eventId;
+
+  // Connection URL
+  const url =
+    "mongodb+srv://admin:Admin123@atlascluster.onkjdyo.mongodb.net/events?retryWrites=true&w=majority";
+  const client = await MongoClient.connect(url);
 
   // post comment
   if (req.method === "POST") {
@@ -19,11 +26,18 @@ function handler(req, res) {
     }
 
     const newComment = {
-      id: new Date().toISOString(),
-      ...req.body,
+      email,
+      name,
+      text,
+      eventId,
     };
 
-    console.log(newComment);
+    const db = client.db();
+    const result = await db.collection("comments").insertOne(newComment);
+
+    console.log(result);
+
+    newComment.id = result.insertedId;
 
     res.status(201).json({ message: "Added comment.", comment: newComment });
   }
@@ -37,6 +51,8 @@ function handler(req, res) {
 
     res.status(200).json({ comments: DUMMY_COMMENTS });
   }
+
+  client.close();
 }
 
 export default handler;
