@@ -30,7 +30,7 @@ function Comments(props) {
 
   async function addCommentHandler(commentData) {
     // send data to API
-    const response = await fetch(`/api/comments/${eventId}`, {
+    const response = await fetch("/api/comments/" + eventId, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -39,6 +39,7 @@ function Comments(props) {
     });
 
     const data = await response.json();
+    console.log(data);
   }
 
   return (
