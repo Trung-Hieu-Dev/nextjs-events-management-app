@@ -22,11 +22,10 @@ function Comments(props) {
         setComments(comments);
       });
     }
-  }, [showComments, eventId]);
+  }, [showComments, eventId, addCommentHandler]);
 
   function toggleCommentsHandler() {
     setShowComments((prevStatus) => !prevStatus);
-    console.log(comments);
   }
 
   async function addCommentHandler(commentData) {

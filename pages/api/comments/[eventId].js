@@ -5,7 +5,7 @@ import { MongoClient } from "mongodb";
 async function handler(req, res) {
   const eventId = req.query.eventId;
 
-  // Connection URL
+  // Open Mongodb Connection
   const url =
     "mongodb+srv://admin:Admin123@atlascluster.onkjdyo.mongodb.net/events?retryWrites=true&w=majority";
   const client = await MongoClient.connect(url);
@@ -54,6 +54,7 @@ async function handler(req, res) {
     res.status(200).json({ comments: documents });
   }
 
+  // close connection
   client.close();
 }
 
